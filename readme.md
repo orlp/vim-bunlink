@@ -31,6 +31,14 @@ All commands warn if you have unsaved changes, which can be
 bypassed by adding `!`.
 
 
+## Installation
+
+Install using your favorite package manager, e.g. using
+[vim-plug](https://github.com/junegunn/vim-plug):
+
+    Plug 'orlp/vim-bunlink'
+
+
 ## Configuration
 
 Using `g:bunlink_switch_order` you can determine in what order bunlink.vim tries
@@ -63,14 +71,6 @@ mappings in my vimrc:
 
     nnoremap <silent> <leader>x :Bunlink<CR>
     nnoremap <silent> <leader>X :Bunlink!<CR>
-
-
-## Installation
-
-Install using your favorite package manager, e.g. using
-[vim-plug](https://github.com/junegunn/vim-plug):
-
-    Plug 'orlp/vim-bunlink'
 
 
 ## License
