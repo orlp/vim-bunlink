@@ -38,7 +38,6 @@ function! bunlink#curwindow(bang)
     endif
 
     " Should we delete this window instead of showing another buffer?
-    echom string([l:bufft, stridx(g:bunlink_delete_window_ft, l:bufft) >= 0])
     let l:default_should_delete =
                 \ !empty(l:bufft) && stridx(g:bunlink_delete_window_ft, l:bufft) >= 0  " Filetype.
                 \ || !empty(getcmdwintype())  " Command window.
