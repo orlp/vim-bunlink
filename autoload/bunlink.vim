@@ -31,8 +31,8 @@ function! bunlink#curwindow(bang)
     let l:bufnr = bufnr('%')
     let l:bufft = getbufvar(l:bufnr, '&ft')
 
-    " Warn if there are unmodified changes.
-    if getbufvar(l:bufnr, '&modified') && empty(a:bang)
+    " Warn if there are unmodified changes and there isn't another window containing this buffer.
+    if getbufvar(l:bufnr, '&modified') && empty(a:bang) && len(win_findbuf(l:bufnr)) <= 1
         call s:print_error('E89: No write since last change for buffer ' . l:bufnr . ' (add ! to override)')
         return
     endif

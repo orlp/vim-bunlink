@@ -27,8 +27,10 @@ except the current one.
 buffer is truly deleted. `:Bwipeout [B]` works like `:Bdelete` but also wipes
 out the buffer afterwards (see `:h bwipeout`).
 
-All commands warn if you have unsaved changes, which can be
-bypassed by adding `!`.
+All commands warn you if you're trying to delete a buffer with unsaved changes,
+which can be bypassed by adding `!`. However `:Bunlink` never warns you if
+you're viewing the buffer in a second window, as there's no risk of losing
+your changes then.
 
 
 ## Installation
