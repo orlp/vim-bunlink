@@ -1,22 +1,23 @@
 # bunlink.vim
 
 Designed to be a replacement for `:bdelete`, this plugin can delete your buffers
-without destroying your windows/splits. It decouples the concept of 'deleting
-a buffer' from 'closing a window'. It offers three commands to do this, with
+without destroying your windows/splits. It decouples the concept of 'deleting a
+buffer' from 'closing a window'. It offers three commands to do this, with
 increasing seriousness: `:Bunlink`, `:Bdelete`, and `:Bwipeout`. By default,
 when you call `:Bunlink`, the following happens:
 
  1. If the current window is a help, quickfix, command history window or a
- similar temporary window (see below in configuration), close the window anyway.
+ similar temporary window, close the window anyway.
  
- 2. Otherwise the current window's buffer is changed to another hidden but
- loaded buffer, or if no such buffer exists, a new buffer (which deletes itself
- if not edited before being hidden, to prevent clutter).
+ 2. Otherwise the current window's buffer is changed intelligently to another
+ hidden but loaded buffer, or if no such buffer exists, a new buffer.
 
- 3. If the old buffer is not viewed anymore in any window, delete it. This is
- similar to linux's `unlink` only truly deleting a file if no hardlinks remain
- to it (for clarity: bunlink.vim *never* deletes any files, it strictly works
- with buffers).
+ 3. If the old buffer is not viewed anymore in any window, delete it.
+ 
+The last step is very similar to linux's `unlink` which only truly deletes a
+file if no hardlinks remain to it (for clarity: bunlink.vim *never* deletes any
+files, it strictly works with buffers). See below in the configuration what 'a
+similar temporary window' and 'intelligently' exactly mean.
 
 Using `:Bunlink` instead of `:bdelete` means you can keep your buffer list
 clean without worrying about destroying your splits or affecting any window
@@ -51,7 +52,8 @@ order is:
     let g:bunlink_switch_order = ['w:mru', 't:mfu:modified', 't:mfu', 'g:mfu:modified', 'g:mfu']
 
 If bunlink.vim can't find a suitable buffer after this list has been exhausted,
-it will create a new buffer.
+it will create a new buffer. To prevent clutter this buffer will delete ifself
+upon being hidden if not modified in any way.
 
 With `g:bunlink_delete_window_ft` you can determine for which filetypes
 bunlink.vim will delete the entire window, rather than changing to a different
